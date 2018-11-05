@@ -1,0 +1,48 @@
+[tool.poetry]
+name = "{{ cookiecutter.project_name }}"
+version = "{{ cookiecutter.version }}"
+description = "{{ cookiecutter.project_short_description }}"
+authors = ["{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>"]
+license = "{{ cookiecutter.open_source_license }}"
+
+readme = "README.rst"
+
+repository = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}"
+documentation = "https://wboxx1.github.io/{{ cookiecutter.project_name }}/"
+
+packages = [
+    { include = "{{ cookiecutter.project_slug }}", from = "src"},
+]
+
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.4",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+]
+[tool.poetry.dependencies]
+# List project dependencies here
+
+[tool.poetry.dev-dependencies]
+bumpversion = "^0.5.3"
+pip = "^18.1"
+wheel = "^0.32.1"
+watchdog = "^0.9.0"
+flake8 = "^3.5.0"
+tox = "^3.5.2"
+coverage = "^4.5.1"
+Sphinx = "^1.8.1"
+twine = "^1.12.1"
+{% if cookiecutter.command_line_interface == "y" -%}
+click = "^6.7"{% endif %}
+{% if cookiecutter.use_pytest == "y" -%}
+pytest = "^3.8.2"
+pytest-runner = "^4.2"{% endif %}
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
