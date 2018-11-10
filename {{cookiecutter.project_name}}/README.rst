@@ -26,7 +26,10 @@
 
 {% if is_open_source %}
 * Free software: {{ cookiecutter.open_source_license }}
+{% if cookiecutter.document_publisher == 'ReadTheDocs' %}
 * Documentation: https://{{ cookiecutter.project_slug | replace("_", "-") }}.readthedocs.io.
+{% else }
+* Documentation: https://{{ cookiecutter.github_username}}.github.io/{{ cookiecutter.project_name }}
 {% endif %}
 
 Features

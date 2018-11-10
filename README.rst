@@ -53,17 +53,19 @@ Cookiecutter 1.4.0 or higher)::
 
 Generate a Python package project::
 
-    cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git
+    cookiecutter https://github.com/wboxx1/cookiecutter-pypackage-poetry.git
 
 Then:
 
 * Create a repo and put it there.
 * Add the repo to your Travis-CI_ account.
-* Install the dev requirements into a virtualenv. (``pip install -r requirements_dev.txt``)
+* Install the dev requirements into a virtualenv. (``poetry install``)
 * Register_ your project with PyPI.
-* Run the Travis CLI command `travis encrypt --add deploy.password` to encrypt your PyPI password in Travis config
-  and activate automated deployment on PyPI when you push a new tag to master branch.
-* Add the repo to your ReadTheDocs_ account + turn on the ReadTheDocs service hook.
+* Run the Travis CLI command `travis encrypt MYPYPI_PASS=your_password --add env.global`
+  to encrypt you PyPI password in Travis config and activate automated deployment on PyPI
+  when you push a new tag to master branch.
+* (if using ReadTheDocs)Add the repo to your ReadTheDocs_ account + turn on the ReadTheDocs service hook.
+* (if using GitHub pages)Navigate to settings and make docs folder githubpages
 * Release your package by pushing a new tag to master.
 * Add a `requirements.txt` file that specifies the packages you will need for
   your project and their versions. For more info see the `pip docs for requirements files`_.

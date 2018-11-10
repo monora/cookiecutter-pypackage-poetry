@@ -85,20 +85,19 @@ servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
 release: dist ## package and upload a release
-	twine upload dist/*
+	poetry publish
 
 dist: clean ## builds source and wheel package
-	python setup.py sdist
-	python setup.py bdist_wheel
-	ls -l dist
+	poetry build
 
 install: clean ## install the package to the active Python's site-packages
 	poetry install
 
-version-major:
-    bumpversion major
-    poetry major
+bumpversion-major: ## Bump current version a major step
+    bumpversion --tag --commit major ./pyproject.toml ./src/{{ cookiecutter.project_slug }}/__init__.py
 
-version-minor:
-    bumpversion minor
-    poetry minor
+bumpversion-minor: ## Bump current version a minor step
+    bumpversion --tag --commit minor ./pyproject.toml ./src/{{ cookiecutter.project_slug }}/__init__.py
+
+bumpversion-patch: ## Bump current version a patch step
+    bumpversion --tag --commit patch ./pyproject.toml ./src/{{ cookiecutter.project_slug }}/__init__.py
