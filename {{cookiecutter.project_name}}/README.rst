@@ -31,6 +31,7 @@
 {% else %}
 * Documentation: https://{{ cookiecutter.github_username}}.github.io/{{ cookiecutter.project_name }}
 {% endif %}
+{% endif %}
 
 Features
 --------
