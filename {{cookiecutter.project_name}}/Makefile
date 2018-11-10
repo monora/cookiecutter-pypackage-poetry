@@ -94,10 +94,11 @@ install: clean ## install the package to the active Python's site-packages
 	poetry install
 
 bumpversion-major: ## Bump current version a major step
-	bumpversion --tag --commit major ./pyproject.toml ./src/{{ cookiecutter.project_slug }}/__init__.py
+	bumpversion major 
 
 bumpversion-minor: ## Bump current version a minor step
-	bumpversion --tag --commit minor ./pyproject.toml ./src/{{ cookiecutter.project_slug }}/__init__.py
+	bumpversion minor
 
 bumpversion-patch: ## Bump current version a patch step
-	bumpversion --tag --commit patch ./pyproject.toml ./src/{{ cookiecutter.project_slug }}/__init__.py
+	bumpversion patch
+	
