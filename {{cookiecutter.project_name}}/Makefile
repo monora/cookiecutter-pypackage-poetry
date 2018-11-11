@@ -92,13 +92,3 @@ dist: clean ## builds source and wheel package
 
 install: clean ## install the package to the active Python's site-packages
 	poetry install
-
-bumpversion-major: ## Bump current version a major step
-	bumpversion major 
-
-bumpversion-minor: ## Bump current version a minor step
-	bumpversion minor
-
-bumpversion-patch: ## Bump current version a patch step
-	bumpversion patch
-	
