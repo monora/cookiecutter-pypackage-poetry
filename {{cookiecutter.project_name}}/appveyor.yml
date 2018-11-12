@@ -79,7 +79,7 @@ after_test:
 artifacts:
   - path: dist\*
 
-{% if cookiecutter.use_pypi_deployment_with_travis == 'y' -%}
+{% if cookiecutter.use_pypi_deployment_with_appveyor == 'y' -%}
 before_deploy:
   - poetry config http-basic.pypi {{ cookiecutter.pypi_username }} %PYPI_PASS%
 
