@@ -5,7 +5,7 @@ environment:
   PIPY_PASS:
     secure: <ENTER ENCRYPTED PIPY_PASS KEY>
   matrix:
-- APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       PYTHON: "C:\\Python34"
       TOX_ENV: "py34"
       DEPLOY: "false"
@@ -79,7 +79,7 @@ after_test:
 artifacts:
   - path: dist\*
 
-{% if cookiecutter.use_pypi_deployment_with_appveyor == 'y' -%}
+{%- if cookiecutter.use_pypi_deployment_with_appveyor == 'y' %}
 before_deploy:
   - poetry config http-basic.pypi {{ cookiecutter.pypi_username }} %PYPI_PASS%
 
@@ -89,4 +89,4 @@ deploy_script:
       { 
         poetry publish 
       }
-{% endif -%}
+{%- endif %}
