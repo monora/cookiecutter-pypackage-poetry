@@ -7,8 +7,9 @@
 .. image:: https://img.shields.io/pypi/v/{{ cookiecutter.project_slug }}.svg
         :target: https://pypi.python.org/pypi/{{ cookiecutter.project_slug }}
 
-.. image:: https://img.shields.io/travis/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}.svg
-        :target: https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
+.. image:: https://ci.appveyor.com/api/projects/status/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}?branch=master&svg=true
+    :target: https://ci.appveyor.com/project/wboxx1/{{ cookiecutter.project_name }}/branch/master
+    :alt: Build status on Appveyor
 
 .. image:: https://readthedocs.org/projects/{{ cookiecutter.project_slug | replace("_", "-") }}/badge/?version=latest
         :target: https://{{ cookiecutter.project_slug | replace("_", "-") }}.readthedocs.io/en/latest/?badge=latest

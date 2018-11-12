@@ -103,8 +103,8 @@ Before you submit a pull request, check that it meets these guidelines:
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
 3. The pull request should work for Python 2.7, 3.4, 3.5 and 3.6, and for PyPy. Check
-   https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/pull_requests
-   and make sure that the tests pass for all supported Python versions.
+   https://ci.appveyor.com/project/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
+   for the pull request build and make sure that the tests pass for all supported Python versions.
 
 Tips
 ----
@@ -112,9 +112,9 @@ Tips
 To run a subset of tests::
 
 {% if cookiecutter.use_pytest == 'y' -%}
-    $ py.test tests.test_{{ cookiecutter.project_slug }}
+    $ poetry run pytest tests/
 {% else %}
-    $ python -m unittest tests.test_{{ cookiecutter.project_slug }}
+    $ poetry run python -m unittest tests.test_{{ cookiecutter.project_slug }}
 {%- endif %}
 
 Deploying
