@@ -14,7 +14,7 @@ from click.testing import CliRunner
 
 from src.{{ cookiecutter.project_slug }} import {{ cookiecutter.project_slug }}
 {%- if cookiecutter.command_line_interface|lower == 'click' %}
-from src.{{ cookiecutter.project_slug }} import cli
+from {{ cookiecutter.project_slug }} import cli
 {%- endif %}
 
 {%- if cookiecutter.use_pytest == 'y' %}
