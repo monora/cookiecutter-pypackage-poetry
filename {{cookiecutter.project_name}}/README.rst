@@ -7,7 +7,6 @@
 .. image:: https://img.shields.io/pypi/v/{{ cookiecutter.project_slug }}.svg
         :target: https://pypi.python.org/pypi/{{ cookiecutter.project_slug }}
 
-<<<<<<< HEAD
 {% if use_pypi_deployment_with_travis -%}
 .. image:: https://img.shields.io/travis/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}.svg
         :target: https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}
@@ -18,11 +17,6 @@
     :target: https://ci.appveyor.com/project/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/branch/master
     :alt: Build status on Appveyor
 {%- endif %}
-=======
-.. image:: https://ci.appveyor.com/api/projects/status/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}?branch=master&svg=true
-    :target: https://ci.appveyor.com/project/wboxx1/{{ cookiecutter.project_name }}/branch/master
-    :alt: Build status on Appveyor
->>>>>>> 3f424d8c13953bde9c07a8f8e514d32165301b7b
 
 .. image:: https://readthedocs.org/projects/{{ cookiecutter.project_slug | replace("_", "-") }}/badge/?version=latest
         :target: https://{{ cookiecutter.project_slug | replace("_", "-") }}.readthedocs.io/en/latest/?badge=latest

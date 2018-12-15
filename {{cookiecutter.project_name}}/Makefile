@@ -85,7 +85,6 @@ servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
 release: dist ## package and upload a release
-<<<<<<< HEAD
     poetry publish
 
 dist: clean ## builds source and wheel package
@@ -99,12 +98,3 @@ version-major:
 
 version-minor:
     bump2version minor
-=======
-	poetry publish
-
-dist: clean ## builds source and wheel package
-	poetry build
-
-install: clean ## install the package to the active Python's site-packages
-	poetry install
->>>>>>> 3f424d8c13953bde9c07a8f8e514d32165301b7b
