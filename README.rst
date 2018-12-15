@@ -9,7 +9,7 @@ Cookiecutter PyPackage
 .. image:: https://travis-ci.org/audreyr/cookiecutter-pypackage.svg?branch=master
     :target: https://travis-ci.org/audreyr/cookiecutter-pypackage     
 
-Cookiecutter_ template for a Python package.
+A fork of cookiecutter-pypackage that uses poetry for dependency management, bump2version in place of bumpversion, adds support for appveyor, and allows use of github pages for doc hosting.
 
 * GitHub repo: https://github.com/audreyr/cookiecutter-pypackage/
 * Documentation: https://cookiecutter-pypackage.readthedocs.io/
@@ -18,11 +18,12 @@ Cookiecutter_ template for a Python package.
 Features
 --------
 
-* Testing setup with ``unittest`` and ``python setup.py test`` or ``py.test``
+* Testing setup with ``unittest`` and ``python setup.py test`` or ``pytest``
 * Travis-CI_: Ready for Travis Continuous Integration testing
+* Appveyor_: Ready for Appveyor Continuous Integration testing
 * Tox_ testing: Setup to easily test for Python 2.7, 3.4, 3.5, 3.6
 * Sphinx_ docs: Documentation ready for generation with, for example, ReadTheDocs_
-* Bumpversion_: Pre-configured version bumping with a single command
+* Bump2version_: Pre-configured version bumping with a single command
 * Auto-release to PyPI_ when you push a new tag to master (optional)
 * Command line interface using Click (optional)
 
@@ -141,11 +142,12 @@ make my own packaging experience better.
 
 
 .. _Travis-CI: http://travis-ci.org/
+.. _Appveyor: http://appveyor.com/
 .. _Tox: http://testrun.org/tox/
 .. _Sphinx: http://sphinx-doc.org/
 .. _ReadTheDocs: https://readthedocs.io/
 .. _`pyup.io`: https://pyup.io/
-.. _Bumpversion: https://github.com/peritus/bumpversion
+.. _Bump2version: https://github.com/c4urself/bump2version
 .. _Punch: https://github.com/lgiordani/punch
 .. _PyPi: https://pypi.python.org/pypi
 
