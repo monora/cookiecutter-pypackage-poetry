@@ -3,7 +3,7 @@
 
 environment:
   PYPI_PASS:
-    secure: Enter your encrypted pass code here
+    secure: <ENTER ENCRYPTED PIPY_PASS KEY>
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       PYTHON: "C:\\Python27"
