@@ -55,23 +55,23 @@ lint: ## check style with flake8
 
 test: ## run tests quickly with the default Python
 {%- if cookiecutter.use_pytest == 'y' %}
-	py.test
+	poetry run pytest
 {%- else %}
 	python setup.py test
 {%- endif %}
 
 test-all: ## run tests on every Python version with tox
-	tox
+	poetry run tox
 
 coverage: ## check code coverage quickly with the default Python
 {%- if cookiecutter.use_pytest == 'y' %}
-	coverage run --source src/{{ cookiecutter.project_slug }} -m pytest
+	poetry run coverage run --source src/{{ cookiecutter.project_slug }} -m pytest
 {%- else %}
-	coverage run --source src/{{ cookiecutter.project_slug }} setup.py test
+	poetry run coverage run --source src/{{ cookiecutter.project_slug }} setup.py test
 {%- endif %}
-	coverage report -m
-	coverage html
-	$(BROWSER) htmlcov/index.html
+	poetry run coverage report -m
+	poetry run coverage html
+	poetry run $(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
 	rm -f docs/{{ cookiecutter.project_slug }}.rst
@@ -85,20 +85,16 @@ servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
 release: dist ## package and upload a release
-	twine upload dist/*
+    poetry publish
 
 dist: clean ## builds source and wheel package
-	python setup.py sdist
-	python setup.py bdist_wheel
-	ls -l dist
+    poetry build
 
 install: clean ## install the package to the active Python's site-packages
 	poetry install
 
 version-major:
-    bumpversion major
-    poetry major
+    bump2version major
 
 version-minor:
-    bumpversion minor
-    poetry minor
+    bump2version minor
