@@ -27,7 +27,7 @@ if __name__ == "__main__":
     if '{{ cookiecutter.use_pypi_deployment_with_travis }}' == 'n':
         remove_file(.travis.yml)
 
-    if '{{ cookicutter.use_pypi_deployment_with_appveyor }}' == 'n':
+    if '{{ cookiecutter.use_pypi_deployment_with_appveyor }}' == 'n':
         remove_file(appveyor.yml)
 
     if "{{ cookiecutter.document_publisher }}" == "ReadTheDocs":
