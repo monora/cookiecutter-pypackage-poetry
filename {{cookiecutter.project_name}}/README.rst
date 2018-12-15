@@ -7,12 +7,12 @@
 .. image:: https://img.shields.io/pypi/v/{{ cookiecutter.project_slug }}.svg
         :target: https://pypi.python.org/pypi/{{ cookiecutter.project_slug }}
 
-{% if use_pypi_deployment_with_travis -%}
+{% if cookiecutter.use_pypi_deployment_with_travis -%}
 .. image:: https://img.shields.io/travis/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}.svg
         :target: https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}
 {%- endif %}
 
-{% if use_pypi_deployment_with_appveyor -%}
+{% if cookiecutter.use_pypi_deployment_with_appveyor -%}
 .. image:: https://ci.appveyor.com/api/projects/status/{{ cookiecutter.github_username }}/branch/master?svg=true
     :target: https://ci.appveyor.com/project/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/branch/master
     :alt: Build status on Appveyor
