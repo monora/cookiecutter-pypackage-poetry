@@ -54,11 +54,13 @@ function clean() {
 Remove build artifacts
 #>
 function cleanBuild() {
-    Remove-Item ".\build" -Recurse
-    Remove-Item ".\dist" -Recurse
-    Remove-Item ".\.eggs" -Recurse
-    Remove-Item ".\*.egg-info"
-    Remove-Item ".\*.egg"
+    $paths = @(".\build", ".\dist", ".\.eggs", ".\*.egg-info", ".\*.egg")
+    foreach ($path in $paths) {
+        if (Test-Path $path) 
+        {
+            Remove-Item $path -Recurse
+        }
+    }
 }
 
 <#
@@ -66,10 +68,13 @@ function cleanBuild() {
 Remove Python file artifacts
 #>
 function cleanPyc() {
-    Remove-Item ".\*.pyc"
-    Remove-Item ".\*.pyo"
-    Remove-Item ".\*~"
-    Remove-Item ".\__pycache__" -Recurse
+    $paths = @(".\*.pyc", ".\*.pyc", ".\*.pyo", ".\*~", ".\__pycache__")
+    foreach ($path in $paths) {
+        if (Test-Path $path)
+        {
+            Remove-Item $path -Recurse
+        }
+    }
 }
 
 <#
@@ -77,10 +82,12 @@ function cleanPyc() {
 Remove test and coverage artifacts
 #>
 function cleanTest() {
-    Remove-Item ".\.tox" -Recurse -Force
-    Remove-Item ".\.coverage" -Force
-    Remove-Item ".\.htmlcov" -Recurse -Force
-    Remove-Item ".\.pytest_cache" -Recurse -Force
+    $paths = @(".\.tox", ".\.coverage", ".\.htmlcov", ".\.pytest_cache")
+    foreach ($path in $paths) {
+        if (Test-Path $path)
+        {
+            Remove-Item $path -Recurse
+        }
 }
 
 <#
@@ -88,7 +95,7 @@ function cleanTest() {
 Check style with flake8
 #>
 function lint() {
-    Invoke-Expression "flake8 {{ cookiecutter.project_slug }} tests"
+    poetry run flake8 {{ cookiecutter.project_slug }} tests
 }
 
 <#
@@ -97,9 +104,9 @@ Run tests quickly with the default Python
 #>
 function test() {
     {%- if cookiecutter.use_pytest == "y" %}
-    Invoke-Expression "poetry run pytest .\tests"
+    poetry run pytest
     {%- else %}
-    Invoke-Expression "poetry run python test.test_{{ cookiecutter.project_slug }}.py"
+    poetry run python test.test_{{ cookiecutter.project_slug }}.py
     {%- endif %}
 }
 
@@ -108,7 +115,7 @@ function test() {
 Run tests on every Python version with tox
 #>
 function testAll() {
-    Invoke-Expression "tox"
+    poetry run tox
 }
 
 <#
@@ -117,24 +124,25 @@ Check code coverage quickly with the default Python
 #>
 function coverage() {
     {%- if cookiecutter.use_pytest == "y" %}
-    Invoke-Expression "poetry run coverage run --source src/{{ cookiecutter.project_slug }} -m pytest"
+    poetry run coverage run --source src/{{ cookiecutter.project_slug }} -m pytest
     {%- else %}
-    Invoke-Expression "poetry run coverage run --source src/{{ cookiecutter.project_slug }} -m test.test_{{ cookiecutter.project_slug }}.py"
+    poetry run coverage run --source src/{{ cookiecutter.project_slug }} -m test.test_{{ cookiecutter.project_slug }}.py
     {%- endif %}
-    Invoke-Expression "poetry coverage report -m"
-    Invoke-Expression "poetry coverage html"
-    Invoke-Expression "poetry run python -c ""$Script:BROWSER_PYSCRIPT"" htmlcov/index.html"
+    poetry coverage report -m
+    poetry coverage html
+    poetry run python -c $Script:BROWSER_PYSCRIPT(htmlcov/index.html)
 }
 
 <#
 Generate Sphinx HTML documentation, including API docs
 #>
 function docs(){
-    Remove-Item ".\docs\{{ cookiecutter.project_slug }}.rst" -Force
-    Remove-Item ".\docs\modules.rst" -Force
-    Invoke-Expression "poetry run sphinx-apidoc -o docs\ src\{{ cookiecutter.project_slug }}"
-    Invoke-Expression "cd .\docs && poetry run make clean && poetry run make html"
-    Invoke-Expression "poetry run ""$Script:BROWSER_PYSCRIPT"" docs\_build\html\index.html"
+    if (Test-Path ".\docs\{{ cookiecutter.project_slug }}.rst") { Remove-Item ".\docs\{{ cookiecutter.project_slug }}.rst" -Force }
+    if (Test-Path ".\docs\modules.rst") { Remove-Item ".\docs\modules.rst" -Force }
+    poetry run sphinx-apidoc -o docs\ src\intermod_library
+    poetry run .\docs\make.bat clean
+    poetry run .\docs\make.bat html
+    poetry run python $Script:BROWSER_PYSCRIPT(.\docs\_build\html\index.html)
 }
 
 <#
@@ -142,7 +150,7 @@ Compile the docs watching for changes
 #>
 function servedocs() {
     docs
-    Invoke-Expression "poetry run watchmedo shell-command -p '*.rst' -c 'cd .\docs && make html' -R -D"
+    poetry run watchmedo shell-command -p '.\docs\*.rst'; poetry run .\docs\make.bat html -R -D
 }
 
 <#
@@ -150,8 +158,7 @@ Package and upload a release
 #>
 function release() {
     dist
-    Invoke-Expression "poetry publish"
-
+    poetry publish
 }
 
 <#
@@ -159,7 +166,7 @@ Builds source and wheel package
 #>
 function dist() {
     clean
-    Invoke-Expression "poetry build"
+    poetry build
 }
 
 <#
@@ -167,28 +174,19 @@ Install the package to the active Python's site-packages
 #>
 function install() {
     clean
-    Invoke-Expression "poetry install"
+    poetry install
 }
 
 function bumpversionMajor {
-    $ScriptDir = Split-Path -parent $MyInvocation.MyCommand.Path
-    $bumpVersion = Join-Path $ScriptDir powerBump.ps1
-    # Import-Module $bumpVersion
-    Invoke-Expression "$bumpVersion major"
+    poetry run bump2version major
 }
 
 function bumpversionMinor {
-    $ScriptDir = Split-Path -parent $MyInvocation.MyCommand.Path
-    $bumpVersion = Join-Path $ScriptDir powerBump.ps1
-    # Import-Module $bumpVersion
-    Invoke-Expression "$bumpVersion minor"
+    poetry run bump2version minor
 }
 
 function bumpversionPatch {
-    $ScriptDir = Split-Path -parent $MyInvocation.MyCommand.Path
-    $bumpVersion = Join-Path $ScriptDir powerBump.ps1
-    # Import-Module $bumpVersion
-    Invoke-Expression "$bumpVersion patch"
+    poetry run bump2version patch
 }
     
 switch ($command) {
