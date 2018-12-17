@@ -129,9 +129,9 @@ function coverage() {
     {%- else %}
     poetry run coverage run --source src\{{ cookiecutter.project_slug }} -m test.test_{{ cookiecutter.project_slug }}.py
     {%- endif %}
-    poetry coverage report -m
-    poetry coverage html
-    poetry run python -c $Script:BROWSER_PYSCRIPT(htmlcov/index.html)
+    poetry run coverage report -m
+    poetry run coverage html
+    poetry run python -c $Script:BROWSER_PYSCRIPT(htmlcov\index.html)
 }
 
 <#
