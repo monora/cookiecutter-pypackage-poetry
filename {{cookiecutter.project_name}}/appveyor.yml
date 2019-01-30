@@ -44,6 +44,16 @@ environment:
       PYTHON: "C:\\Python36-x64"
       TOX_ENV: "py36"
       DEPLOY: "false"
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      PYTHON: "C:\\Python37"
+      TOX_ENV: "py37"
+      DEPLOY: "false"
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      PYTHON: "C:\\Python37-x64"
+      TOX_ENV: "py37"
+      DEPLOY: "false"
       
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
       PYTHON: "2.7"
@@ -63,6 +73,11 @@ environment:
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
       PYTHON: "3.6"
       TOX_ENV: "py36"
+      DEPLOY: "true"
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+      PYTHON: "3.7"
+      TOX_ENV: "py37"
       DEPLOY: "true"
 
 init:
