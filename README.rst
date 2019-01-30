@@ -21,7 +21,7 @@ Features
 * Testing setup with ``unittest`` and ``python setup.py test`` or ``pytest``
 * Travis-CI_: Ready for Travis Continuous Integration testing
 * Appveyor_: Ready for Appveyor Continuous Integration testing
-* Tox_ testing: Setup to easily test for Python 2.7, 3.4, 3.5, 3.6
+* Tox_ testing: Setup to easily test for Python 2.7, 3.4, 3.5, 3.6, 3.7
 * Sphinx_ docs: Documentation ready for generation with, for example, ReadTheDocs_
 * Bump2version_: Pre-configured version bumping with a single command
 * Auto-release to PyPI_ when you push a new tag to master (optional)
@@ -62,7 +62,7 @@ Then:
 * Add the repo to your Travis-CI_ account.
 * Install the dev requirements into a virtualenv. (``poetry install``)
 * Register_ your project with PyPI.
-* Run the Travis CLI command `travis encrypt MYPYPI_PASS=your_password --add env.global`
+* Run the Travis CLI command ``travis encrypt MYPYPI_PASS=your_password --add env.global``
   to encrypt you PyPI password in Travis config and activate automated deployment on PyPI
   when you push a new tag to master branch.
 * (if using ReadTheDocs)Add the repo to your ReadTheDocs_ account + turn on the ReadTheDocs service hook.
