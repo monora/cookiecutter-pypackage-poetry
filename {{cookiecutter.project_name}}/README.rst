@@ -56,7 +56,7 @@ Features
 Credits
 -------
 
-This package was created with Cookiecutter_ and the `wboxx1/cookiecutter-pypackage`_ project template.
+This package was created with Cookiecutter_ and the `monora/cookiecutter-pypackage`_ project template.
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`wboxx1/cookiecutter-pypackage`: https://github.com/wboxx1/cookiecutter-pypackage-poetry
+.. _`monora/cookiecutter-pypackage`: https://github.com/monora/cookiecutter-pypackage-poetry

@@ -54,7 +54,7 @@ Cookiecutter 1.4.0 or higher)::
 
 Generate a Python package project::
 
-    cookiecutter https://github.com/wboxx1/cookiecutter-pypackage-poetry.git
+    cookiecutter https://github.com/monora/cookiecutter-pypackage-poetry.git
 
 Then:
 
