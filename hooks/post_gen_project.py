@@ -17,6 +17,9 @@ if __name__ == "__main__":
     if "{{ cookiecutter.use_pytest }}" == "y":
         remove_file("tests/__init__.py")
 
+    if "{{ cookiecutter.use_direnv }}" != "y":
+        remove_file(".envrc")
+
     if "no" in "{{ cookiecutter.command_line_interface|lower }}":
         cli_file = os.path.join("src", "{{ cookiecutter.project_slug }}", "cli.py")
         remove_file(cli_file)
