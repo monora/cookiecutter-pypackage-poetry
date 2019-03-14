@@ -84,6 +84,15 @@ You can optionally make use of ``.envrc`` to better handle your virtualenv:
 .. _direnv: https://github.com/direnv/direnv/wiki/Python
 .. _pyenv: https://github.com/pyenv/pyenv
 
+If you use Intellij_ you can use the configuration contained in directory ``.idea``. Just open
+this directory using *File | Open*. Then:
+
+* Set *Project SDK* to the existing virtualenv created above.
+* When running the tests, be sure to change the working directory in the *Run/Debug
+  Configuration* to the project directory which contains ``cookiecutter.json``.
+
+.. _Intellij: https://www.jetbrains.com/help/idea/python.html
+
 For more details, see the `cookiecutter-pypackage tutorial`_.
 
 .. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
