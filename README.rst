@@ -72,6 +72,18 @@ Then:
 .. _`pip docs for requirements files`: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 .. _Register: https://packaging.python.org/distributing/#register-your-project
 
+You can optionally make use of ``.envrc`` to better handle your virtualenv:
+
+* Install pyenv_ and direnv_, then:
+* Run ``direnv allow`` to approve project directory. This will create a new virtualenv using
+  `pyenv`
+* Run ``pip install -r requirements_dev.txt`` to install development requirements in the new
+  virtualenv
+* Run ``pytest`` to check that you have a working development environment.
+
+.. _direnv: https://github.com/direnv/direnv/wiki/Python
+.. _pyenv: https://github.com/pyenv/pyenv
+
 For more details, see the `cookiecutter-pypackage tutorial`_.
 
 .. _`cookiecutter-pypackage tutorial`: https://cookiecutter-pypackage.readthedocs.io/en/latest/tutorial.html
