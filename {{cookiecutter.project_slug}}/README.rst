@@ -26,8 +26,19 @@
 
 {% if is_open_source %}
 * Free software: {{ cookiecutter.open_source_license }}
+{% if cookiecutter.document_publisher == 'ReadTheDocs' %}
 * Documentation: https://{{ cookiecutter.project_slug | replace("_", "-") }}.readthedocs.io.
+{% else %}
+* Documentation: https://{{ cookiecutter.github_username}}.github.io/{{ cookiecutter.project_slug }}
 {% endif %}
+{% endif %}
+
+Installation:
+-------------
+
+.. code-block:: console
+
+    $ pip install {{ cookiecutter.project_slug }}
 
 Features
 --------
@@ -37,7 +48,7 @@ Features
 Credits
 -------
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+This package was created with Cookiecutter_ and the `monora/cookiecutter-pypackage`_ project template.
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+.. _`monora/cookiecutter-pypackage-poetry`: https://github.com/monora/cookiecutter-pypackage-poetry

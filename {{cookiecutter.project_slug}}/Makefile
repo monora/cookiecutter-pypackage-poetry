@@ -51,28 +51,29 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 
 lint: ## check style with flake8
-	flake8 {{ cookiecutter.project_slug }} tests
+	poetry run flake8 {{ cookiecutter.project_slug }} tests
 
 test: ## run tests quickly with the default Python
 {%- if cookiecutter.use_pytest == 'y' %}
-	py.test
+	poetry run pytest
 {%- else %}
-	python setup.py test
+	poetry run python setup.py test
 {%- endif %}
 
 test-all: ## run tests on every Python version with tox
-	tox
+	poetry run tox
 
 coverage: ## check code coverage quickly with the default Python
 {%- if cookiecutter.use_pytest == 'y' %}
-	coverage run --source {{ cookiecutter.project_slug }} -m pytest
+	poetry run coverage run --source {{ cookiecutter.project_slug }} -m pytest
 {%- else %}
-	coverage run --source {{ cookiecutter.project_slug }} setup.py test
+	poetry run coverage run --source {{ cookiecutter.project_slug }} setup.py test
 {%- endif %}
-	coverage report -m
-	coverage html
-	$(BROWSER) htmlcov/index.html
+	poetry run coverage report -m
+	poetry run coverage html
+	poetry run $(BROWSER) htmlcov/index.html
 
+# The next two task work only when venv ist activated (i.e. with `poetry shell`)
 docs: ## generate Sphinx HTML documentation, including API docs
 	rm -f docs/{{ cookiecutter.project_slug }}.rst
 	rm -f docs/modules.rst
@@ -85,12 +86,16 @@ servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
 release: dist ## package and upload a release
-	twine upload dist/*
+	poetry publish
 
 dist: clean ## builds source and wheel package
-	python setup.py sdist
-	python setup.py bdist_wheel
-	ls -l dist
+	poetry build
 
 install: clean ## install the package to the active Python's site-packages
-	python setup.py install
+	poetry install
+
+version-major:
+	bump2version major
+
+version-minor:
+	bump2version minor

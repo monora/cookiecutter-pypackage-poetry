@@ -40,12 +40,21 @@ Or download the `tarball`_:
 
     $ curl  -OL https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/tarball/master
 
-Once you have a copy of the source, you can install it with:
+.. code-block:: console
+
+    $ poetry install
+
+If you in addition use `direnv` you must first allow direnv when you enter the project directory:
 
 .. code-block:: console
 
-    $ python setup.py install
+    $ direnv allow
 
+If you use `Intellij IDEA` you have to set the `Project SDK` to the virtual environment created by poetry, which is located here:
+
+.. code-block:: console
+
+    $ ls $HOME/.cache/pypoetry/virtualenvs/{{ cookiecutter.project_slug }}-py*/bin/python
 
 .. _Github repo: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
 .. _tarball: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/tarball/master

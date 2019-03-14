@@ -57,18 +57,18 @@ If you are proposing a feature:
 Get Started!
 ------------
 
-Ready to contribute? Here's how to set up `{{ cookiecutter.project_slug }}` for local development.
+Ready to contribute? Here's how to set up `{{ cookiecutter.project_name }}` for local development.
 
-1. Fork the `{{ cookiecutter.project_slug }}` repo on GitHub.
+1. Fork the `{{ cookiecutter.project_name }}` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_name_here/{{ cookiecutter.project_slug }}.git
+    $ git clone git@github.com:your_name_here/{{ cookiecutter.project_name }}.git
 
-3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
+3. Install your local copy into a virtualenv using poetry. Assuming you have poetry installed, this is how you set up your fork for local development::
 
-    $ mkvirtualenv {{ cookiecutter.project_slug }}
     $ cd {{ cookiecutter.project_slug }}/
-    $ python setup.py develop
+    $ poetry install
+    $ poetry shell
 
 4. Create a branch for local development::
 
@@ -80,7 +80,6 @@ Ready to contribute? Here's how to set up `{{ cookiecutter.project_slug }}` for 
    tests, including testing other Python versions with tox::
 
     $ flake8 {{ cookiecutter.project_slug }} tests
-    $ python setup.py test or py.test
     $ tox
 
    To get flake8 and tox, just pip install them into your virtualenv.
@@ -103,7 +102,12 @@ Before you submit a pull request, check that it meets these guidelines:
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
 3. The pull request should work for Python 2.7, 3.4, 3.5 and 3.6, and for PyPy. Check
+   {% if cookiecutter.use_pypi_deployment_with_travis == "y" -%}
    https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/pull_requests
+   {%- endif %}
+   {% if cookiecutter.use_pypi_deployment_with_appveyor == "y" -%}
+   https://ci.appveyor.com/project/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
+   {%- endif %}
    and make sure that the tests pass for all supported Python versions.
 
 Tips
@@ -112,9 +116,9 @@ Tips
 To run a subset of tests::
 
 {% if cookiecutter.use_pytest == 'y' -%}
-    $ py.test tests.test_{{ cookiecutter.project_slug }}
+    $ poetry run pytest tests/
 {% else %}
-    $ python -m unittest tests.test_{{ cookiecutter.project_slug }}
+    $ poetry run python -m unittest tests.test_{{ cookiecutter.project_slug }}
 {%- endif %}
 
 Deploying
@@ -124,7 +128,7 @@ A reminder for the maintainers on how to deploy.
 Make sure all your changes are committed (including an entry in HISTORY.rst).
 Then run::
 
-$ bumpversion patch # possible: major / minor / patch
+$ bump2version patch # possible: major / minor / patch
 $ git push
 $ git push --tags
 
