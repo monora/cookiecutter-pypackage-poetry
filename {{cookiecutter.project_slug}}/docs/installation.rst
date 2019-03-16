@@ -50,7 +50,8 @@ If you in addition use `direnv` you must first allow direnv when you enter the p
 
     $ direnv allow
 
-If you use `Intellij IDEA` you have to set the `Project SDK` to the virtual environment created by poetry, which is located here:
+If you use `Intellij IDEA` you have to set the `Project SDK` to the virtual environment created by
+poetry, which is located here:
 
 .. code-block:: console
 
